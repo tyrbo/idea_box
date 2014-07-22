@@ -23,8 +23,8 @@ class IdeaBoxApp < Sinatra::Base
   end
 
   get '/sms' do
-    title, description = params['Body'].split(',', 2)
-    IdeaStore.create(title: title, description: description.strip)
+    title, description = params[:Body].split(',', 2)
+    IdeaStore.create({ 'title' => title, 'description' => description.strip })
     ''
   end
 
@@ -34,6 +34,7 @@ class IdeaBoxApp < Sinatra::Base
   end
 
   post '/' do
+    p params[:idea]
     IdeaStore.create(params[:idea])
     redirect '/'
   end
