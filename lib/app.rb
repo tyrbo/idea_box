@@ -5,10 +5,6 @@ class IdeaBoxApp < Sinatra::Base
   set :method_override, true
   set :root, 'lib/app'
 
-  configure :development do
-    register Sinatra::Reloader
-  end
-
   not_found do
     erb :error
   end
@@ -42,6 +38,13 @@ class IdeaBoxApp < Sinatra::Base
   post '/:id/like' do |id|
     idea = IdeaStore.find(id.to_i)
     idea.like!
+    IdeaStore.update(id.to_i, idea.to_h)
+    redirect '/'
+  end
+
+  post '/:id/dislike' do |id|
+    idea = IdeaStore.find(id.to_i)
+    idea.dislike!
     IdeaStore.update(id.to_i, idea.to_h)
     redirect '/'
   end

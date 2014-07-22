@@ -1,7 +1,10 @@
 ---
 ideas:
-- title: tet
-  description: test
-- title: A new idea.
-  description: Testing!
-  rank: 5
+- title: Likes and Dislikes
+  description: Do they work?
+  likes: 4
+  dislikes: 1
+- title: Another Like/Dislike Test
+  description: Ranking.
+  likes: 4
+  dislikes: 2
