@@ -23,7 +23,7 @@ class IdeaBoxApp < Sinatra::Base
   end
 
   get '/sms' do
-    title, description = params[:Body].split(',', 2)
+    title, description = params['Body'].split(',', 2)
     IdeaStore.create(title: title, description: description.strip)
     ''
   end
