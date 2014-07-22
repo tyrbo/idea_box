@@ -1,25 +1,79 @@
-<h1>IdeaBox</h1>
-<form action='/' method='POST'>
-  <p>
-    Your Idea:
-  </p>
-  <input type='text' name='idea[title]'>
-  <textarea name='idea[description]'></textarea>
-  <input type='submit'>
-</form>
-<ul>
-  <% ideas.each do |idea| %>
-    <li>
-      <form action='/<%= idea.id %>/like' method='POST' style="display: inline">
-        <input type='submit' value="+"/>
+<div class="container">
+  <div class="jumbotron">
+    <h1>IdeaBox</h1>
+    <p>A place to store bad ideas.</p>
+  </div>
+</div>
+<!--<div class="container">
+  <form action="/" method="post" role="form">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title" name="idea[title]">
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" class="form-control" name='idea[description]'></textarea>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>-->
+<div class="container">
+  <div class="page-header clearfix">
+    <button class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#add-idea">
+      <span class="glyphicon glyphicon-plus"></span>
+    </button>
+  </div>
+  <ul class="list-group">
+    <% ideas.each do |idea| %>
+      <li class="list-group-item">
+        <span class="badge"><%= idea.rank %></span>
+        <form action='/<%= idea.id %>/like' method='POST' style="display: inline">
+          <button type='submit'>
+            <span class='glyphicon glyphicon-thumbs-up'></span>
+          </button>
+        </form>
+        <form action='/<%= idea.id %>/dislike' method='POST' style="display: inline">
+          <button type='submit'>
+            <span class='glyphicon glyphicon-thumbs-down'></span>
+          </button>
+        </form>
+        <%= idea.title %> (<%= idea.id %>)
+        <%= idea.description %>
+
+        <a href="/<%= idea.id %>/edit">edit</a>
+        <form action="/<%= idea.id %>" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="submit" value="delete">
+        </form>
+      </li>
+    <% end %>
+  </ul>
+</div>
+<div class="modal fade" id="add-idea" tabindex="-1" role="dialog" aria-labelledby="add-idea-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="post" role="form">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="add-idea-label">New Idea</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="idea[title]">
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" class="form-control" name='idea[description]'></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save idea</button>
+        </div>
       </form>
-      <%= idea.title %> (<%= idea.id %>)<br>
-      <%= idea.description %>
-      <a href="/<%= idea.id %>/edit">edit</a>
-      <form action="/<%= idea.id %>" method="post">
-        <input type="hidden" name="_method" value="delete">
-        <input type="submit" value="delete">
-      </form>
-    </li>
-  <% end %>
-</ul>
+    </div>
+  </div>
+</div>

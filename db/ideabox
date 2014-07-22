@@ -1,2 +1,5 @@
 ---
-ideas: []
+ideas:
+- title: A new idea
+  description: test
+  rank: 15
