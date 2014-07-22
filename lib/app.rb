@@ -1,3 +1,4 @@
+require 'twilio-ruby'
 require 'idea_box'
 
 class IdeaBoxApp < Sinatra::Base
@@ -19,6 +20,11 @@ class IdeaBoxApp < Sinatra::Base
   get '/:id/edit' do |id|
     idea = IdeaStore.find(id.to_i)
     erb :edit, locals: { idea: idea }
+  end
+
+  get '/sms' do
+    title, description = params[:Body].split(',', 2)
+    IdeaStore.create(title: title, description: description.strip)
   end
 
   put '/:id' do |id|
