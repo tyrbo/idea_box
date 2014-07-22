@@ -1,7 +1,7 @@
 ---
 ideas:
-- title: asdfasdf
-  description: asdf
-  rank: 17
 - title: tet
   description: test
+- title: A new idea.
+  description: Testing!
+  rank: 5

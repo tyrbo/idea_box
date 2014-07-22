@@ -1,3 +1,7 @@
-h2.no-margin {
+.inline {
+  display: inline;
+}
+
+h3.no-margin {
   margin-top: 0;
 }
