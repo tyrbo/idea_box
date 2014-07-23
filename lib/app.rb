@@ -25,12 +25,12 @@ class IdeaBoxApp < Sinatra::Base
   end
 
   put '/:id' do |id|
-    IdeaStore.update(id.to_i, params[:idea])
+    idea = IdeaStore.find(id.to_i)
+    IdeaStore.update(idea, params[:idea])
     redirect '/'
   end
 
   post '/' do
-    p params[:idea]
     IdeaStore.create(params[:idea])
     redirect '/'
   end
@@ -38,14 +38,14 @@ class IdeaBoxApp < Sinatra::Base
   post '/:id/like' do |id|
     idea = IdeaStore.find(id.to_i)
     idea.like!
-    IdeaStore.update(id.to_i, idea.to_h)
+    IdeaStore.update(idea, idea.to_h)
     redirect '/'
   end
 
   post '/:id/dislike' do |id|
     idea = IdeaStore.find(id.to_i)
     idea.dislike!
-    IdeaStore.update(id.to_i, idea.to_h)
+    IdeaStore.update(idea, idea.to_h)
     redirect '/'
   end
 

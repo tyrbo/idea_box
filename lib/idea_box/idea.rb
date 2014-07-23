@@ -1,7 +1,8 @@
 class Idea
   include Comparable
 
-  attr_accessor :title, :description, :rank, :id, :likes, :dislikes
+  attr_accessor :title, :description
+  attr_reader :likes, :dislikes, :id
 
   def initialize(data)
     @title = data['title']
@@ -23,6 +24,15 @@ class Idea
     @dislikes += 1
   end
 
+  def merge(data)
+    data.each_pair do |k, v|
+      if respond_to?("#{k}=")
+        send("#{k}=", v)
+      end
+    end
+    self
+  end
+
   def to_h
     {
       'title' => title,
@@ -31,6 +41,8 @@ class Idea
       'dislikes' => dislikes
     }
   end
+
+  private
 
   def <=>(other)
     rank <=> other.rank

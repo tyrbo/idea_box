@@ -20,10 +20,10 @@ class IdeaStore
     Idea.new(raw_idea.merge('id' => id))
   end
 
-  def self.update(id, data)
-    item = merge(find(id), data)
+  def self.update(item, data)
+    item.merge(data)
     database.transaction do
-      database['ideas'][id] = item.to_h
+      database['ideas'][item.id] = item.to_h
     end
   end
 
@@ -45,15 +45,6 @@ class IdeaStore
     database.transaction do |db|
       db['ideas'] || []
     end
-  end
-
-  def self.merge(item, data)
-    data.each_pair do |k, v|
-      if item.respond_to?(k)
-        item.send("#{k}=", v)
-      end
-    end
-    item
   end
 
   def self.database
