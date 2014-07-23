@@ -18,12 +18,6 @@ class IdeaBoxApp < Sinatra::Base
     erb :edit, locals: { idea: idea }
   end
 
-  get '/sms' do
-    title, description = params[:Body].split(',', 2)
-    IdeaStore.create({ 'title' => title, 'description' => description.strip })
-    ''
-  end
-
   put '/:id' do |id|
     idea = IdeaStore.find(id.to_i)
     IdeaStore.update(idea, params[:idea])
@@ -47,6 +41,12 @@ class IdeaBoxApp < Sinatra::Base
     idea.dislike!
     IdeaStore.update(idea, idea.to_h)
     redirect '/'
+  end
+  
+  post '/sms' do
+    title, description = params[:Body].split(',', 2)
+    IdeaStore.create({ 'title' => title, 'description' => description.strip })
+    ''
   end
 
   delete '/:id' do |id|
