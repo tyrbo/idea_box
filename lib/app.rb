@@ -1,4 +1,3 @@
-require 'twilio-ruby'
 require 'idea_box'
 
 class IdeaBoxApp < Sinatra::Base
