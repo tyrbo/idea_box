@@ -21,8 +21,9 @@ class IdeaStore
   end
 
   def self.update(id, data)
+    item = merge(find(id), data)
     database.transaction do
-      database['ideas'][id] = data
+      database['ideas'][id] = item.to_h
     end
   end
 
@@ -31,6 +32,8 @@ class IdeaStore
       database['ideas'].delete_at(position)
     end
   end
+
+  private
 
   def self.find_raw_idea(id)
     database.transaction do
@@ -42,6 +45,15 @@ class IdeaStore
     database.transaction do |db|
       db['ideas'] || []
     end
+  end
+
+  def self.merge(item, data)
+    data.each_pair do |k, v|
+      if item.respond_to?(k)
+        item.send("#{k}=", v)
+      end
+    end
+    item
   end
 
   def self.database
