@@ -1,6 +1,13 @@
 require 'yaml/store'
 
 class IdeaStore
+  def self.init(path = 'db/ideabox')
+    @database = YAML::Store.new 'db/ideabox'
+    @database.transaction do
+      @database['ideas'] ||= []
+    end
+  end
+
   def self.all
     ideas = []
     raw_ideas.each_with_index do |data, i|
@@ -33,6 +40,12 @@ class IdeaStore
     end
   end
 
+  def self.clear
+    database.transaction do
+      database['ideas'] = []
+    end
+  end
+
   private
 
   def self.find_raw_idea(id)
@@ -48,12 +61,11 @@ class IdeaStore
   end
 
   def self.database
-    return @database if @database
-
-    @database = YAML::Store.new 'db/ideabox'
-    @database.transaction do
-      @database['ideas'] ||= []
+    if @database
+      @database
+    else
+      init
+      @database
     end
-    @database
   end
 end

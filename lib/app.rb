@@ -4,7 +4,7 @@ class IdeaBoxApp < Sinatra::Base
   set :method_override, true
   set :root, 'lib/app'
 
-  use Rack::SslEnforcer, except_hosts: ['127.0.0.1', 'localhost', '::1']
+  use Rack::SslEnforcer, except_environments: ['development', 'test']
 
   not_found do
     erb :error
