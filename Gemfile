@@ -4,3 +4,4 @@ source 'https://rubygems.org'
 
 gem 'twilio-ruby'
 gem 'sinatra', require: 'sinatra/base'
+gem 'rack-ssl-enforcer'

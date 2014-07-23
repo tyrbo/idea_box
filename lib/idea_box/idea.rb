@@ -45,6 +45,6 @@ class Idea
   private
 
   def <=>(other)
-    rank <=> other.rank
+    other.rank <=> rank
   end
 end

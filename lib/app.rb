@@ -5,12 +5,14 @@ class IdeaBoxApp < Sinatra::Base
   set :method_override, true
   set :root, 'lib/app'
 
+  use Rack::SslEnforcer, except_hosts: ['127.0.0.1', 'localhost', '::0']
+
   not_found do
     erb :error
   end
 
   get '/' do
-    erb :index, locals: { ideas: IdeaStore.all.sort.reverse }
+    erb :index, locals: { ideas: IdeaStore.all.sort }
   end
 
   get '/:id/edit' do |id|
