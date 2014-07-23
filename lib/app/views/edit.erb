@@ -1,11 +1,15 @@
-<h1>IdeaBox</h1>
+<div class="container">
+  <form action="/<%= idea.id %>" method="post" role="form">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title" name="idea[title]" value="<%= idea.title %>">
+    </div>
 
-<form action="/<%= idea.id %>" method="POST">
-  <p>
-    Edit your Idea:
-  </p>
-  <input type="hidden" name="_method" value="PUT" />
-  <input type='text' name='idea[title]' value="<%= idea.title %>"/><br/>
-  <textarea name='idea[description]'><%= idea.description %></textarea><br/>
-  <input type='submit'/>
-</form>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" class="form-control" name='idea[description]'><%= idea.description %></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Save idea</button>
+    <input type="hidden" name="_method" value="put">
+  </form>
+</div>
