@@ -1,3 +1,14 @@
 ---
-ideas: []
-users: []
+ideas_counter: 1
+ideas: {}
+users_counter: 1
+users:
+  0:
+    id: 0
+    username: test
+    password: !ruby/string:BCrypt::Password
+      str: "$2a$10$Ps1dQJ6/QldvTVpcxWsNxONZBEzUYchT6GkInhIbA4JdITMGanrKC"
+      version: !ruby/string:BCrypt::Password 2a
+      cost: 10
+      salt: "$2a$10$Ps1dQJ6/QldvTVpcxWsNxO"
+      checksum: NZBEzUYchT6GkInhIbA4JdITMGanrKC

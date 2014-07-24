@@ -21,10 +21,80 @@
         <h1>IdeaBox</h1>
         <p>A place to store bad ideas.</p>
       </div>
+      <div class="row">
+        <div class="col-xs-12 sub-margin">
+          <% if user %>
+            <span id="username" class="pull-right">Welcome, <b><%= user.username %></b></span>
+          <% else %>
+            <button class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#register">
+              <span class="glyphicon glyphicon-plus"></span> Register
+            </button>
+            <button class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#login">
+              <span class="glyphicon glyphicon-plus"></span> Log In
+            </button>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="register-label" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form method="post" role="form" action="/users/new">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title" id="register-label">Sign Up</h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="title">Username</label>
+                <input type="text" class="form-control" id="username" name="user[username]">
+              </div>
+
+              <div class="form-group">
+                <label for="description">Password</label>
+                <input type="password" class="form-control" id="password" name="user[password]">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Sign Up</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="login-label" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form method="post" role="form" action="/users">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title" id="login-label">Log In</h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="title">Username</label>
+                <input type="text" class="form-control" id="username" name="user[username]">
+              </div>
+
+              <div class="form-group">
+                <label for="description">Password</label>
+                <input type="password" class="form-control" id="password" name="user[password]">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Log In</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
 
     <%= yield %>
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   </body>

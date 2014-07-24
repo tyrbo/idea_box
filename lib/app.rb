@@ -5,8 +5,8 @@ class IdeaBoxApp < Sinatra::Base
   set :root, 'lib/app'
 
   use Rack::SslEnforcer, except_environments: ['development', 'test']
-
   enable :sessions
+  set :session_secret, ENV['SESSION_SECRET'] ||= 'secret'
 
   not_found do
     erb :error
@@ -45,7 +45,7 @@ class IdeaBoxApp < Sinatra::Base
     IdeaStore.update(idea, idea.to_h)
     redirect '/'
   end
-  
+
   post '/sms' do
     title, description = params[:Body].split(',', 2)
     IdeaStore.create({ 'title' => title, 'description' => description.strip })
@@ -59,10 +59,10 @@ class IdeaBoxApp < Sinatra::Base
 
   post '/users' do
     if user = UserStore.login(params[:user])
-      session['uid'] = user.id
+      session[:uid] = user.id
       redirect '/'
     else
-      redirect '/', locals: { errors: 'Invalid username or password.' }
+      redirect '/'
     end
   end
 
@@ -71,9 +71,9 @@ class IdeaBoxApp < Sinatra::Base
     UserStore.create(user.to_h)
     redirect '/'
   end
-  
+
   def current_user
-    if session['uid']
+    if session[:uid]
       UserStore.find(session['uid'])
     end
   end

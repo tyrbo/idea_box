@@ -2,6 +2,10 @@
   display: inline;
 }
 
-h3.no-margin {
+.sub-margin {
+  margin-top: -25px;
+}
+
+.no-margin {
   margin-top: 0;
 }
