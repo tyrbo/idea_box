@@ -2,7 +2,7 @@ require 'yaml/store'
 
 class IdeaStore
   def self.init(path = 'db/ideabox')
-    @database = YAML::Store.new 'db/ideabox'
+    @database = YAML::Store.new path
     @database.transaction do
       @database['ideas'] ||= []
     end
@@ -55,8 +55,8 @@ class IdeaStore
   end
 
   def self.raw_ideas
-    database.transaction do |db|
-      db['ideas'] || []
+    database.transaction do
+      database['ideas'] || []
     end
   end
 
