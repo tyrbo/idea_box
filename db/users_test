@@ -1,0 +1,12 @@
+---
+users:
+  0:
+    id: 0
+    username: test
+    password: !ruby/string:BCrypt::Password
+      str: "$2a$10$9HK7epUmLzLDUM6.iJh2vupTR6P9fcUjfruXxBQMoTrCyECC28yka"
+      version: !ruby/string:BCrypt::Password 2a
+      cost: 10
+      salt: "$2a$10$9HK7epUmLzLDUM6.iJh2vu"
+      checksum: pTR6P9fcUjfruXxBQMoTrCyECC28yka
+users_counter: 1

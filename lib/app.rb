@@ -6,12 +6,14 @@ class IdeaBoxApp < Sinatra::Base
 
   use Rack::SslEnforcer, except_environments: ['development', 'test']
 
+  enable :sessions
+
   not_found do
     erb :error
   end
 
   get '/' do
-    erb :index, locals: { ideas: IdeaStore.all.sort }
+    erb :index, locals: { ideas: IdeaStore.all.sort, user: current_user }
   end
 
   get '/:id/edit' do |id|
@@ -53,5 +55,26 @@ class IdeaBoxApp < Sinatra::Base
   delete '/:id' do |id|
     IdeaStore.delete(id.to_i)
     redirect '/'
+  end
+
+  post '/users' do
+    if user = UserStore.login(params[:user])
+      session['uid'] = user.id
+      redirect '/'
+    else
+      redirect '/', locals: { errors: 'Invalid username or password.' }
+    end
+  end
+
+  post '/users/new' do
+    user = User.new(params[:user])
+    UserStore.create(user.to_h)
+    redirect '/'
+  end
+  
+  def current_user
+    if session['uid']
+      UserStore.find(session['uid'])
+    end
   end
 end

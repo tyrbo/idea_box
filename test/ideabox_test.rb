@@ -9,11 +9,14 @@ describe IdeaBoxApp do
 
   def setup
     IdeaStore.init('db/ideabox_test')
+    UserStore.init('db/users_test')
     IdeaStore.clear
+    UserStore.clear
   end
 
   def teardown
-    IdeaStore.clear
+    #IdeaStore.clear
+    #UserStore.clear
   end
 
   describe 'get /' do
@@ -148,6 +151,37 @@ describe IdeaBoxApp do
       delete '/0'
 
       assert_equal 1, IdeaStore.all.count
+    end
+  end
+
+  describe 'post /users/new' do
+    it 'creates a new user' do
+      post '/users/new', user: { username: 'test', password: 'test' }
+
+      assert_equal 1, UserStore.all.count
+    end
+
+    it 'should redirect after user creation' do
+      post '/users/new', user: { username: 'test', password: 'test' }
+
+      assert last_response.redirect?
+      follow_redirect!
+      assert last_response.ok?
+    end
+  end
+
+  describe 'post /users' do
+    it 'allows a user to log in' do
+      user = User.new('username' => 'test', 'password' => 'test')
+      UserStore.create(user.to_h)
+
+      post '/users', user: { username: 'test', password: 'test' }
+      follow_redirect!
+      assert last_response.ok?
+      html = Nokogiri::HTML(last_response.body)
+
+      assert last_response.ok?
+      assert_equal 'test', html.at_css('span#username').text
     end
   end
 end
