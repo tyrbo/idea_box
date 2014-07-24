@@ -8,73 +8,8 @@
   <% end %>
   <ul class="list-group">
     <% ideas.each do |idea| %>
-      <li class="list-group-item">
-        <div class="row">
-          <div class="col-xs-6">
-            <h3 class="no-margin"><%= idea.title %></h3>
-          </div>
-          <div class="col-xs-6 text-right">
-            <span class="badge"><%= idea.rank %></span>
-            <form action="/<%= idea.id %>/like" method="post" class="inline">
-              <button type="submit" class="btn btn-success btn-xs">
-                <span class='glyphicon glyphicon-thumbs-up'></span>
-              </button>
-            </form>
-            <form action="/<%= idea.id %>/dislike" method="post" class="inline">
-              <button type="submit" class="btn btn-danger btn-xs">
-                <span class='glyphicon glyphicon-thumbs-down'></span>
-              </button>
-            </form>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <p><%= idea.description %></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <form action="/<%= idea.id %>/edit" method="get" class="inline">
-              <button type="submit" class="btn btn-default btn-xs">
-                <span class="glyphicon glyphicon-pencil"></span> Edit
-              </button>
-            </form>
-            <form action="/<%= idea.id %>" method="post" class="inline">
-              <input type="hidden" name="_method" value="delete">
-              <button type="submit" class="btn btn-danger btn-xs">
-                <span class="glyphicon glyphicon-remove"></span> Delete
-              </button>
-            </form>
-          </div>
-        </div>
-      </li>
+      <%= erb :idea_list_item, locals: { idea: idea } %>
     <% end %>
   </ul>
 </div>
-<div class="modal fade" id="add-idea" tabindex="-1" role="dialog" aria-labelledby="add-idea-label" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form method="post" role="form">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h4 class="modal-title" id="add-idea-label">New Idea</h4>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" name="idea[title]">
-          </div>
-
-          <div class="form-group">
-            <label for="description">Description</label>
-            <textarea id="description" class="form-control" name='idea[description]'></textarea>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save idea</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+<%= erb :new_idea_modal %>

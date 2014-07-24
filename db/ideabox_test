@@ -1,9 +1,3 @@
 ---
-ideas:
-  0:
-    id: 0
-    title: Original Title
-    description: Original Description
-    likes: 0
-    dislikes: 1
-ideas_counter: 1
+ideas: {}
+ideas_counter: 0

@@ -6,6 +6,10 @@
   margin-top: -25px;
 }
 
+.login-register button {
+  margin-left: 5px;
+}
+
 .no-margin {
   margin-top: 0;
 }

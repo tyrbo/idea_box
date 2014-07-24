@@ -15,8 +15,8 @@ describe IdeaBoxApp do
   end
 
   def teardown
-    #IdeaStore.clear
-    #UserStore.clear
+    IdeaStore.clear
+    UserStore.clear
   end
 
   describe 'get /' do
