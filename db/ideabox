@@ -1,14 +1,15 @@
 ---
+ideas_counter: 0
+ideas: {}
 users_counter: 1
 users:
   0:
     id: 0
     username: jon
     password: !ruby/string:BCrypt::Password
-      str: "$2a$10$qKEYOnaNaJUwLQk9y7Y8tuiSmnQivhyFhf3ffHyygOrK3CY9fcL6e"
+      str: "$2a$10$lZSrTjZVrCgkZvFMc4DBW.o8n7cjvKIGOJzrPgRNU7CUrRWBT0AQW"
       version: !ruby/string:BCrypt::Password 2a
       cost: 10
-      salt: "$2a$10$qKEYOnaNaJUwLQk9y7Y8tu"
-      checksum: iSmnQivhyFhf3ffHyygOrK3CY9fcL6e
-ideas_counter: 1
-ideas: {}
+      salt: "$2a$10$lZSrTjZVrCgkZvFMc4DBW."
+      checksum: o8n7cjvKIGOJzrPgRNU7CUrRWBT0AQW
+    phone_number: ''

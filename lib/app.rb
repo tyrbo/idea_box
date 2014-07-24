@@ -63,11 +63,13 @@ class IdeaBoxApp < Sinatra::Base
     end
   end
 
-  #post '/sms' do
-  #  title, description = params[:Body].split(',', 2)
-  #  IdeaStore.create({ 'title' => title, 'description' => description.strip })
-  #  ''
-  #end
+  post '/sms' do
+    if user = UserStore.find_by_number(params[:From])
+      title, description = params[:Body].split(',', 2)
+      IdeaStore.create({ 'title' => title, 'description' => description.strip }, user)
+    end
+    ''
+  end
 
   delete '/:id' do |id|
     protected!(id) do

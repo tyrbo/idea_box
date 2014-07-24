@@ -20,6 +20,10 @@ class UserStore < Store
     User.new(raw_user) if raw_user
   end
 
+  def self.find_by_number(number)
+    all.detect { |x| x.phone_number == number }
+  end
+
   def self.login(params)
     database.transaction do
       user = database[table].detect do |_, v|
