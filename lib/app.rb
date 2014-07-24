@@ -64,8 +64,8 @@ class IdeaBoxApp < Sinatra::Base
   end
 
   post '/sms' do
+    puts "Got params: #{params}"
     if user = UserStore.find_by_number(params[:From])
-      puts "Got params: #{params}"
       title, description = params[:Body].split(',', 2)
       IdeaStore.create({ 'title' => title, 'description' => description.strip }, user)
     end
