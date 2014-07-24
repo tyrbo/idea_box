@@ -1,0 +1,27 @@
+<% if env['x-rack.flash'][:error] %>
+  <div class="alert alert-danger alert-dismissable" id="errors" role="alert">
+    <button type="button" class="close" data-dismiss="alert">
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Close</span>
+    </button>
+    <%= env['x-rack.flash'][:error] %>
+  </div>
+<% end %>
+<% if env['x-rack.flash'][:info] %>
+  <div class="alert alert-info alert-dismissable" id="errors" role="alert">
+    <button type="button" class="close" data-dismiss="alert">
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Close</span>
+    </button>
+    <%= env['x-rack.flash'][:info] %>
+  </div>
+<% end %>
+<% if env['x-rack.flash'][:success] %>
+  <div class="alert alert-success alert-dismissable" id="errors" role="alert">
+    <button type="button" class="close" data-dismiss="alert">
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Close</span>
+    </button>
+    <%= env['x-rack.flash'][:success] %>
+  </div>
+<% end %>

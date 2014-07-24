@@ -9,9 +9,15 @@ class UserStore < Store
     users
   end
 
+  def self.exists?(username)
+    database.transaction do
+      database['users'].any? { |_, x| x['username'] == username }
+    end
+  end
+
   def self.find(id)
     raw_user = find_raw_obj(id)
-    User.new(raw_user)
+    User.new(raw_user) if raw_user
   end
 
   def self.login(params)

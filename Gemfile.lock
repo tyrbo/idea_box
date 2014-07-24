@@ -3,6 +3,8 @@ GEM
   specs:
     bcrypt (3.1.7)
     rack (1.5.2)
+    rack-flash3 (1.0.5)
+      rack
     rack-protection (1.5.3)
       rack
     rack-ssl-enforcer (0.2.8)
@@ -17,5 +19,6 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt
+  rack-flash3
   rack-ssl-enforcer
   sinatra

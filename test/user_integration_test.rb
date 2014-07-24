@@ -8,7 +8,7 @@ describe IdeaBoxApp do
   end
 
   def setup
-    UserStore.init('db/users_test')
+    UserStore.init('db/ideabox_test')
     UserStore.clear
   end
 

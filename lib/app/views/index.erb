@@ -1,11 +1,11 @@
 <div class="container">
-  <% if @user %>
-    <div class="page-header clearfix">
+  <div class="page-header clearfix">
+    <% if @user %>
       <button class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#add-idea">
         <span class="glyphicon glyphicon-plus"></span> New Idea
       </button>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
   <ul class="list-group">
     <% ideas.each do |idea| %>
       <%= erb :idea_list_item, locals: { idea: idea } %>

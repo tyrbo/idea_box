@@ -2,7 +2,7 @@ class Idea
   include Comparable
 
   attr_accessor :title, :description
-  attr_reader :likes, :dislikes, :id
+  attr_reader :likes, :dislikes, :id, :user_id
 
   def initialize(data)
     @title = data['title']
@@ -10,6 +10,7 @@ class Idea
     @id = data['id']
     @likes = data['likes'] || 0
     @dislikes = data['dislikes'] || 0
+    @user_id = data['user_id']
   end
 
   def rank
@@ -39,7 +40,8 @@ class Idea
       'title' => title,
       'description' => description,
       'likes' => likes,
-      'dislikes' => dislikes
+      'dislikes' => dislikes,
+      'user_id' => user_id
     }
   end
 
