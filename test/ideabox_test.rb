@@ -181,7 +181,7 @@ describe IdeaBoxApp do
       html = Nokogiri::HTML(last_response.body)
 
       assert last_response.ok?
-      assert_equal 'test', html.at_css('span#username').text
+      assert_equal 'Welcome, test', html.at_css('span#username').text
     end
   end
 end

@@ -1,3 +1,7 @@
 ---
-ideas: {}
-ideas_counter: 0
+ideas:
+  1:
+    title: Original Title
+    description: Original Description
+    id: 1
+ideas_counter: 2

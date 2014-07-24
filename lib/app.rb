@@ -8,12 +8,16 @@ class IdeaBoxApp < Sinatra::Base
   enable :sessions
   set :session_secret, ENV['SESSION_SECRET'] ||= 'secret'
 
+  before do
+    @user = current_user
+  end
+
   not_found do
     erb :error
   end
 
   get '/' do
-    erb :index, locals: { ideas: IdeaStore.all.sort, user: current_user }
+    erb :index, locals: { ideas: IdeaStore.all.sort }
   end
 
   get '/:id/edit' do |id|

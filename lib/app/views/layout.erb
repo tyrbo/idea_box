@@ -23,8 +23,8 @@
       </div>
       <div class="row">
         <div class="col-xs-12 sub-margin">
-          <% if user %>
-            <span id="username" class="pull-right">Welcome, <b><%= user.username %></b></span>
+          <% if @user %>
+            <span id="username" class="pull-right">Welcome, <b><%= @user.username %></b></span>
           <% else %>
             <button class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#register">
               <span class="glyphicon glyphicon-plus"></span> Register
