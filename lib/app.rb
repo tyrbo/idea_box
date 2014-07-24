@@ -61,7 +61,13 @@ class IdeaBoxApp < Sinatra::Base
     redirect '/'
   end
 
-  post '/users' do
+  post '/users/new' do
+    user = User.new(params[:user])
+    UserStore.create(user.to_h)
+    redirect '/'
+  end
+
+  post '/login' do
     if user = UserStore.login(params[:user])
       session[:uid] = user.id
       redirect '/'
@@ -70,9 +76,8 @@ class IdeaBoxApp < Sinatra::Base
     end
   end
 
-  post '/users/new' do
-    user = User.new(params[:user])
-    UserStore.create(user.to_h)
+  get '/logout' do
+    session[:uid] = nil
     redirect '/'
   end
 

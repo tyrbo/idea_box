@@ -1,7 +1,9 @@
 ---
 ideas:
-  1:
+  0:
+    id: 0
     title: Original Title
     description: Original Description
-    id: 1
-ideas_counter: 2
+    likes: 0
+    dislikes: 1
+ideas_counter: 1

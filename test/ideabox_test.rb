@@ -170,18 +170,35 @@ describe IdeaBoxApp do
     end
   end
 
-  describe 'post /users' do
+  describe 'post /login' do
     it 'allows a user to log in' do
       user = User.new('username' => 'test', 'password' => 'test')
       UserStore.create(user.to_h)
 
-      post '/users', user: { username: 'test', password: 'test' }
+      post '/login', user: { username: 'test', password: 'test' }
       follow_redirect!
       assert last_response.ok?
       html = Nokogiri::HTML(last_response.body)
 
       assert last_response.ok?
       assert_equal 'Welcome, test', html.at_css('span#username').text
+    end
+  end
+
+  describe 'get /logout' do
+    it 'logs a user out' do
+      user = User.new('username' => 'test', 'password' => 'test')
+      UserStore.create(user.to_h)
+
+      post '/login', user: { username: 'test', password: 'test' }
+      follow_redirect!
+      html = Nokogiri::HTML(last_response.body)
+      assert_equal 'Welcome, test', html.at_css('span#username').text
+
+      get '/logout'
+      follow_redirect!
+      html = Nokogiri::HTML(last_response.body)
+      refute html.at_css('span#username')
     end
   end
 end
